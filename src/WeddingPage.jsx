@@ -115,7 +115,7 @@ export default function WeddingPage() {
             </p>
 
             <h1 className="text-5xl md:text-7xl text-white font-light leading-tight">
-              Kavin <span className="text-yellow-400">&</span> Sasindi
+              Chamath <span className="text-yellow-400">&</span> Dulyana
             </h1>
 
             <div className="w-32 h-[1px] bg-yellow-400 mx-auto my-8"></div>
@@ -251,7 +251,7 @@ export default function WeddingPage() {
           </p>
 
           <h1 className="text-6xl md:text-8xl font-light text-white leading-tight">
-            Kavin <span className="text-yellow-400">&</span> Sasindi
+            Chamath <span className="text-yellow-400">&</span> Dulyana
           </h1>
 
           <div className="w-32 h-[1px] bg-yellow-400 mx-auto my-8"></div>
@@ -488,7 +488,7 @@ duration-700
       {/* FOOTER */}
       <footer className="py-8 text-center border-t border-yellow-400/20">
         <p className="text-gray-500 tracking-widest">
-          Crafted like an agency experience ✨
+          Crafted by Invitations.lk ✨
         </p>
       </footer>
     </div>
