@@ -60,7 +60,10 @@ export default function WeddingPage() {
           onEnded={() => setShowIntro(false)}
           onError={() => setShowIntro(false)}
         >
-          <source src="https://res.cloudinary.com/dagiis3pz/video/upload/v1778312438/wedding-site/hero.mp4" type="video/mp4" />
+          <source
+            src="https://res.cloudinary.com/dagiis3pz/video/upload/v1778311043/wedding-site/counting.mp4"
+            type="video/mp4"
+          />
         </video>
       </div>
     );
@@ -172,7 +175,10 @@ export default function WeddingPage() {
     <div className="bg-black text-white font-serif overflow-x-hidden">
       {/* 🎶 AUDIO */}
       <audio ref={audioRef} loop>
-        <source src="https://res.cloudinary.com/dagiis3pz/video/upload/v1778311076/wedding-site/music.mp3" type="audio/mp3" />
+        <source
+          src="https://res.cloudinary.com/dagiis3pz/video/upload/v1778311076/wedding-site/music.mp3"
+          type="audio/mp3"
+        />
       </audio>
 
       {/* 🎧 MUSIC BUTTON */}
@@ -230,7 +236,10 @@ export default function WeddingPage() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover scale-105"
         >
-          <source src="https://res.cloudinary.com/dagiis3pz/video/upload/v1778312438/wedding-site/hero.mp4" type="video/mp4" />
+          <source
+            src="https://res.cloudinary.com/dagiis3pz/video/upload/v1778312438/wedding-site/hero.mp4"
+            type="video/mp4"
+          />
         </video>
 
         {/* DARK OVERLAY */}
@@ -286,7 +295,8 @@ export default function WeddingPage() {
       <div
         className="relative"
         style={{
-          backgroundImage: "url('https://res.cloudinary.com/dagiis3pz/image/upload/v1778311050/wedding-site/g5.jpg')",
+          backgroundImage:
+            "url('https://res.cloudinary.com/dagiis3pz/image/upload/v1778311050/wedding-site/g5.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -373,7 +383,8 @@ duration-700
       <div
         className="relative"
         style={{
-          backgroundImage: "url('https://res.cloudinary.com/dagiis3pz/image/upload/v1778311051/wedding-site/g6.jpg')",
+          backgroundImage:
+            "url('https://res.cloudinary.com/dagiis3pz/image/upload/v1778311051/wedding-site/g6.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -390,7 +401,10 @@ duration-700
               controls
               className="w-full max-w-5xl mx-auto rounded-2xl shadow-2xl"
             >
-              <source src="https://res.cloudinary.com/dagiis3pz/video/upload/v1778311077/wedding-site/video.mp4" type="video/mp4" />
+              <source
+                src="https://res.cloudinary.com/dagiis3pz/video/upload/v1778311077/wedding-site/video.mp4"
+                type="video/mp4"
+              />
             </video>
           </section>
 
