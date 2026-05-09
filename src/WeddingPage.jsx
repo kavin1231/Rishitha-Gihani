@@ -296,7 +296,7 @@ export default function WeddingPage() {
         className="relative"
         style={{
           backgroundImage:
-            "url('https://res.cloudinary.com/dagiis3pz/image/upload/v1778311050/wedding-site/g5.jpg')",
+            "url('https://res.cloudinary.com/dagiis3pz/image/upload/f_auto,q_auto,w_1280/v1778311050/wedding-site/g5.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -358,7 +358,8 @@ duration-700
                   <motion.img
                     key={img}
                     whileHover={{ scale: 1.05 }}
-                    src={`https://res.cloudinary.com/dagiis3pz/image/upload/v1778311046/wedding-site/g${img}.jpg`}
+                    src={`https://res.cloudinary.com/dagiis3pz/image/upload/f_auto,q_auto,w_800/v1778311046/wedding-site/g${img}.jpg`}
+                    loading="lazy"
                     className="
 w-full
 rounded-[30px]
@@ -384,7 +385,7 @@ duration-700
         className="relative"
         style={{
           backgroundImage:
-            "url('https://res.cloudinary.com/dagiis3pz/image/upload/v1778311051/wedding-site/g6.jpg')",
+            "url('https://res.cloudinary.com/dagiis3pz/image/upload/f_auto,q_auto,w_1280/v1778311051/wedding-site/g6.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
