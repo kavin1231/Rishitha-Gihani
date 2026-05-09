@@ -60,7 +60,7 @@ export default function WeddingPage() {
           onEnded={() => setShowIntro(false)}
           onError={() => setShowIntro(false)}
         >
-          <source src="https://res.cloudinary.com/dagiis3pz/video/upload/v1778311043/wedding-site/counting.mp4" type="video/mp4" />
+          <source src="https://res.cloudinary.com/dagiis3pz/video/upload/v1778312438/wedding-site/hero.mp4" type="video/mp4" />
         </video>
       </div>
     );
@@ -230,7 +230,7 @@ export default function WeddingPage() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover scale-105"
         >
-          <source src="https://res.cloudinary.com/dagiis3pz/video/upload/v1778311077/wedding-site/video.mp4" type="video/mp4" />
+          <source src="https://res.cloudinary.com/dagiis3pz/video/upload/v1778312438/wedding-site/hero.mp4" type="video/mp4" />
         </video>
 
         {/* DARK OVERLAY */}
