@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Environment variables (NEVER commit these!)
+.env
+.env.local
+.env.*.local
+
 # Large media files
 public/
 *.mp4
@@ -29,3 +34,22 @@ public/
 *.njsproj
 *.sln
 *.sw?
+
+# IDE
+.vscode
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Vercel
+.vercel
+
+# Cloudinary (scripts with API keys)
+upload-*.js
+cloudinary-urls.json
+.cloudinary_config
+
+.vercel
