@@ -1,11 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { FaMusic, FaPause } from "react-icons/fa";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { config } from "./config";
 
 export default function WeddingPage() {
   const audioRef = useRef(null);
+  const introRef = useRef(null);
   const [playing, setPlaying] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
@@ -16,23 +18,30 @@ export default function WeddingPage() {
     setTimeout(() => setLoaded(true), 1200);
   }, []);
 
-  // 🎵 MUSIC CONTROL
-  // 🎵 MUSIC CONTROL
-  const toggleMusic = () => {
+  // 🎵 MUSIC CONTROL - Optimized with useCallback
+  const toggleMusic = useCallback(() => {
     if (!audioRef.current) return;
 
     if (playing) {
       audioRef.current.pause();
       setPlaying(false);
     } else {
-      audioRef.current.play();
+      audioRef.current.play().catch(() => {});
       setPlaying(true);
     }
-  };
+  }, [playing]);
 
   // 🎵 auto unlock on first click
   useEffect(() => {
     const unlock = () => {
+      // Try to play the intro video with sound if it's present (will be allowed after a user interaction)
+      try {
+        if (introRef.current) {
+          introRef.current.play().catch(() => {});
+        }
+      } catch (e) {}
+
+      // Also attempt to play background audio (for music)
       audioRef.current
         ?.play()
         .then(() => setPlaying(true))
@@ -40,6 +49,7 @@ export default function WeddingPage() {
     };
 
     window.addEventListener("click", unlock, { once: true });
+    return () => window.removeEventListener("click", unlock);
   }, []);
 
   // ✨ floating particles
@@ -52,18 +62,15 @@ export default function WeddingPage() {
     return (
       <div className="fixed inset-0 z-[100] bg-black">
         <video
+          ref={introRef}
           autoPlay
-          muted
           playsInline
           preload="auto"
           className="w-full h-full object-cover"
           onEnded={() => setShowIntro(false)}
           onError={() => setShowIntro(false)}
         >
-          <source
-            src="https://res.cloudinary.com/dagiis3pz/video/upload/v1778311043/wedding-site/counting.mp4"
-            type="video/mp4"
-          />
+          <source src="/counting2.mp4" type="video/mp4" />
         </video>
       </div>
     );
@@ -95,19 +102,7 @@ export default function WeddingPage() {
           initial={{ opacity: 0, scale: 0.8, y: 60 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1.2 }}
-          className="
-          relative
-          z-10
-          w-[90%]
-          max-w-2xl
-          rounded-[40px]
-          border
-          border-yellow-400/30
-          bg-white/[0.03]
-          backdrop-blur-2xl
-          shadow-[0_0_80px_rgba(255,215,0,0.15)]
-          overflow-hidden
-          "
+          className="relative z-10 w-[90%] max-w-2xl rounded-[40px] border border-yellow-400/30 bg-white/[0.03] backdrop-blur-2xl shadow-[0_0_80px_rgba(255,215,0,0.15)] overflow-hidden"
         >
           {/* TOP GOLD LINE */}
           <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-yellow-400 to-transparent"></div>
@@ -118,7 +113,7 @@ export default function WeddingPage() {
             </p>
 
             <h1 className="text-5xl md:text-7xl text-white font-light leading-tight">
-              Chamath <span className="text-yellow-400">&</span> Dulyana
+              Rishitha <span className="text-yellow-400">&</span> Gihani
             </h1>
 
             <div className="w-32 h-[1px] bg-yellow-400 mx-auto my-8"></div>
@@ -143,22 +138,7 @@ export default function WeddingPage() {
                   setPlaying(true);
                 }, 500);
               }}
-              className="
-              mt-12
-              px-10
-              py-5
-              rounded-full
-              border
-              border-yellow-400
-              text-yellow-300
-              uppercase
-              tracking-[5px]
-              text-sm
-              hover:bg-yellow-400
-              hover:text-black
-              transition-all
-              duration-700
-              "
+              className="mt-12 px-10 py-5 rounded-full border border-yellow-400 text-yellow-300 uppercase tracking-[5px] text-sm hover:bg-yellow-400 hover:text-black transition-all duration-700"
             >
               Open Invitation ✨
             </motion.button>
@@ -175,10 +155,7 @@ export default function WeddingPage() {
     <div className="bg-black text-white font-serif overflow-x-hidden">
       {/* 🎶 AUDIO */}
       <audio ref={audioRef} loop>
-        <source
-          src="https://res.cloudinary.com/dagiis3pz/video/upload/v1778311076/wedding-site/music.mp3"
-          type="audio/mp3"
-        />
+        <source src="/alex-warren-ordinary.mp3" type="audio/mp3" />
       </audio>
 
       {/* 🎧 MUSIC BUTTON */}
@@ -227,26 +204,23 @@ export default function WeddingPage() {
       </div>
 
       {/* 🔥 HERO (AGENCY STYLE) */}
-      <section className="h-screen relative flex items-center justify-center overflow-hidden">
+      <section className="h-[110vh] relative flex items-center justify-center overflow-hidden">
         {/* VIDEO */}
         <video
           autoPlay
           muted
           loop
           playsInline
-          className="absolute inset-0 w-full h-full object-cover scale-105"
+          className="absolute inset-0 w-full h-full object-cover"
         >
-          <source
-            src="https://res.cloudinary.com/dagiis3pz/video/upload/v1778312438/wedding-site/hero.mp4"
-            type="video/mp4"
-          />
+          <source src="/hero.mp4" type="video/mp4" />
         </video>
 
         {/* DARK OVERLAY */}
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/20" />
 
         {/* GOLD GRADIENT */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60" />
 
         {/* HERO CONTENT */}
         <motion.div
@@ -260,7 +234,7 @@ export default function WeddingPage() {
           </p>
 
           <h1 className="text-6xl md:text-8xl font-light text-white leading-tight">
-            Chamath <span className="text-yellow-400">&</span> Dulyana
+            Rishitha <span className="text-yellow-400">&</span> Gihani
           </h1>
 
           <div className="w-32 h-[1px] bg-yellow-400 mx-auto my-8"></div>
@@ -291,12 +265,43 @@ export default function WeddingPage() {
         </motion.div>
       </section>
 
-      {/* CONTENT SECTIONS - G5 BACKGROUND */}
+      {/* CONTENT SECTIONS - BACK1 BACKGROUND */}
+      <div
+        className="relative min-h-screen mt-8"
+        style={{
+          backgroundImage: "url('/back1.jpeg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="relative z-10">
+          {/* 💌 STORY */}
+          <section
+            id="story"
+            className="min-h-screen flex items-center justify-center px-6 py-24 text-center"
+            data-aos="fade-up"
+          >
+            <div className="bg-black/30 backdrop-blur-sm p-12 rounded-3xl">
+              <h2 className="text-5xl text-yellow-400 mb-6">Our Story</h2>
+              <p className="max-w-2xl mx-auto text-gray-300 leading-8">
+                Two hearts from different journeys found each other through
+                love, laughter, and countless beautiful memories. What began as
+                a simple connection slowly grew into a forever kind of love.
+                Together, they now begin a new chapter filled with happiness,
+                dreams, and endless togetherness. Join us as we celebrate the
+                beginning of their beautiful forever story. 💍✨
+              </p>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      {/* CONTENT SECTIONS - G6 BACKGROUND */}
       <div
         className="relative"
         style={{
           backgroundImage:
-            "url('https://res.cloudinary.com/dagiis3pz/image/upload/f_auto,q_auto,w_1280/v1778311050/wedding-site/g5.jpg')",
+            "url('https://res.cloudinary.com/dagiis3pz/image/upload/f_auto,q_auto,w_1280/v1778311051/wedding-site/g6.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -305,72 +310,20 @@ export default function WeddingPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black via-black/40 to-black"></div>
 
         <div className="relative z-10">
-          {/* 💌 STORY */}
-          <section id="story" className="py-24 text-center" data-aos="fade-up">
-            <h2 className="text-5xl text-yellow-400 mb-6">Our Story</h2>
-            <p className="max-w-2xl mx-auto text-gray-400 leading-8">
-              A journey that turned two hearts into one forever ✨
-            </p>
-          </section>
-
-          {/* 📅 EVENTS (AGENCY CARDS) */}
-          <section className="py-24 px-6">
-            <h2 className="text-5xl text-yellow-400 text-center mb-14">
-              Wedding Events
-            </h2>
-
-            <div className="grid md:grid-cols-3 gap-10">
-              {["Engagement", "Wedding", "Reception"].map((e, i) => (
-                <motion.div
-                  key={i}
-                  whileHover={{ scale: 1.06 }}
-                  className="
-group
-bg-white/[0.03]
-backdrop-blur-2xl
-border border-yellow-400/20
-p-10
-rounded-[30px]
-text-center
-shadow-[0_0_40px_rgba(255,215,0,0.08)]
-hover:shadow-[0_0_60px_rgba(255,215,0,0.2)]
-hover:-translate-y-3
-transition-all
-duration-700
-"
-                  data-aos="zoom-in"
-                >
-                  <h3 className="text-2xl text-yellow-300 mb-3">{e}</h3>
-                  <p className="text-gray-300">Dec 20, 2026</p>
-                  <p className="text-gray-500">10:00 AM</p>
-                </motion.div>
-              ))}
-            </div>
-          </section>
-
           {/* 🖼️ GALLERY (LUXURY GRID) */}
           <section className="py-24 text-center">
             <h2 className="text-5xl text-yellow-400 mb-12">Moments</h2>
 
             <div className="px-6">
               <div className="mx-auto max-w-7xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {[1, 2, 4, 3].map((img) => (
+                {[1, 2, 3, 4].map((img) => (
                   <motion.img
                     key={img}
                     whileHover={{ scale: 1.05 }}
-                    src={`https://res.cloudinary.com/dagiis3pz/image/upload/f_auto,q_auto,w_800/v1778311046/wedding-site/g${img}.jpg`}
+                    src={`/g${img}.jpeg`}
                     loading="lazy"
-                    className="
-w-full
-rounded-[30px]
-h-[420px]
-object-cover
-shadow-[0_0_50px_rgba(0,0,0,0.5)]
-hover:scale-[1.03]
-hover:rotate-[1deg]
-transition-all
-duration-700
-"
+                    alt={`Gallery image ${img}`}
+                    className="w-full rounded-[30px] h-[420px] object-cover shadow-[0_0_50px_rgba(0,0,0,0.5)] hover:scale-[1.03] hover:rotate-[1deg] transition-all duration-700"
                     data-aos="fade-up"
                   />
                 ))}
@@ -398,15 +351,31 @@ duration-700
           <section className="py-24 text-center">
             <h2 className="text-5xl text-yellow-400 mb-10">Our Moments</h2>
 
-            <video
-              controls
-              className="w-full max-w-5xl mx-auto rounded-2xl shadow-2xl"
-            >
-              <source
-                src="https://res.cloudinary.com/dagiis3pz/video/upload/v1778311077/wedding-site/video.mp4"
-                type="video/mp4"
-              />
-            </video>
+            <div className="px-6">
+              <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-6">
+                <video
+                  controls
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-[850px] rounded-2xl shadow-2xl object-cover"
+                >
+                  <source src="/add1.mp4" type="video/mp4" />
+                </video>
+
+                <video
+                  controls
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-[850px] rounded-2xl shadow-2xl object-cover"
+                >
+                  <source src="/add2.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
           </section>
 
           {/* 🧭 LOCATION */}
@@ -415,21 +384,79 @@ duration-700
 
             <iframe
               className="w-full h-[400px]"
-              src="https://www.google.com/maps?q=Hotel+Green+Court&z=17&output=embed"
-              title="Hotel Green Court location"
+              src="https://www.google.com/maps?q=Tangerine+Beach+Hotel&z=17&output=embed"
+              title="Tangerine Beach Hotel location"
             />
 
             <a
-              href="https://maps.app.goo.gl/gXEDApzEuzMtrDZ57"
+              href={config.googleMapsLocation}
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
               className="mt-6 inline-block text-yellow-400 underline underline-offset-4"
             >
               Open in Google Maps
             </a>
           </section>
 
-          {/* 📝 RSVP */}
+          {/* � INVITATION DETAILS */}
+          <section className="min-h-screen flex items-center justify-center px-6 py-20 bg-black text-center">
+            <div
+              data-aos="zoom-in"
+              className="max-w-3xl border border-yellow-700 p-10 rounded-3xl bg-[#111]"
+            >
+              <p className="text-yellow-500 tracking-[6px] uppercase text-sm">
+                Together With Their Families
+              </p>
+
+              <h1 className="text-5xl md:text-7xl text-yellow-400 font-luxury mt-8 leading-tight">
+                Gihani <span className="text-white">&</span> Rishitha
+              </h1>
+
+              <div className="mt-10 text-gray-300 space-y-3 text-sm md:text-base">
+                <p>Mr. Silva & Mrs. (Late) Silva</p>
+                <p className="text-yellow-500">Together With</p>
+                <p>Mr. & Mrs. Fernando</p>
+              </div>
+
+              <p className="mt-10 text-gray-400 tracking-wide">
+                Will be honored to have the presence of
+              </p>
+
+              <p className="mt-6 text-yellow-400 text-xl">
+                To celebrate the wedding of their children
+              </p>
+
+              <div className="mt-10 space-y-3">
+                <h2 className="text-3xl text-white font-semibold">
+                  Thursday, 25th June 2026
+                </h2>
+
+                <p className="text-yellow-500">
+                  Poruwa Ceremony Begins at 10.00 AM
+                </p>
+              </div>
+
+              <div className="mt-10">
+                <h3 className="text-2xl text-yellow-400">
+                  Tangerine Beach Hotel
+                </h3>
+
+                <p className="text-gray-400 mt-2">De Abrew Road, Waskaduwa</p>
+              </div>
+
+              <div className="mt-12 border-t border-yellow-700 pt-6">
+                <p className="text-yellow-500 uppercase tracking-[4px]">
+                  RSVP Regrets Only
+                </p>
+
+                <p className="mt-4 text-gray-300">Deepal - 0715217746</p>
+
+                <p className="text-gray-300">Saman - 0702808136</p>
+              </div>
+            </div>
+          </section>
+
+          {/* �📝 RSVP */}
           <section className="py-28 px-6 text-center relative overflow-hidden">
             {/* ✨ BACKGROUND LIGHT */}
             <div className="absolute inset-0 bg-yellow-400/5 blur-3xl"></div>
@@ -463,38 +490,13 @@ duration-700
 
               {/* PREMIUM BUTTON */}
               <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSd5SC31tZzlzRKC7bJ6_8TX7mTOZU26mXNrd7l4cpNc0Q8F-Q/viewform?usp=publish-editor"
+                href={config.rsvpFormUrl}
                 target="_blank"
-                rel="noreferrer"
-                className="
-                inline-flex
-                items-center
-                gap-4
-                px-12
-                py-5
-                rounded-full
-                border
-                border-yellow-400
-                text-yellow-300
-                uppercase
-                tracking-[4px]
-                text-sm
-                bg-white/[0.03]
-                backdrop-blur-xl
-                hover:bg-yellow-400
-                hover:text-black
-                hover:scale-105
-                hover:shadow-[0_0_50px_rgba(255,215,0,0.4)]
-                transition-all
-                duration-700
-                "
+                rel="noreferrer noopener"
+                className="inline-flex items-center gap-4 px-12 py-5 rounded-full border border-yellow-400 text-yellow-300 uppercase tracking-[4px] text-sm bg-white/[0.03] backdrop-blur-xl hover:bg-yellow-400 hover:text-black hover:scale-105 hover:shadow-[0_0_50px_rgba(255,215,0,0.4)] transition-all duration-700"
               >
                 Reserve Your Seat ✨
               </a>
-
-              <p className="mt-6 text-gray-500 italic">
-                RSVP before December 10, 2026
-              </p>
             </motion.div>
           </section>
         </div>

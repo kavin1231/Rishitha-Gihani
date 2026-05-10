@@ -1,7 +1,12 @@
 import WeddingPage from "./WeddingPage";
+import ErrorBoundary from "./ErrorBoundary";
 
 function App() {
-  return <WeddingPage />;
+  return (
+    <ErrorBoundary>
+      <WeddingPage />
+    </ErrorBoundary>
+  );
 }
 
 export default App;
