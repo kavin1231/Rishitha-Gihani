@@ -9,7 +9,9 @@ export const config = {
     backgroundMusic:
       "https://res.cloudinary.com/dagiis3pz/video/upload/v1778466790/alex-warren-ordinary_lkr069.mp3",
     heroVideo:
-      "https://res.cloudinary.com/dagiis3pz/video/upload/v1778492568/heroupdate_tbsnre.mp4",
+      "https://res.cloudinary.com/dagiis3pz/video/upload/f_auto,q_auto:good,dpr_auto,w_1600/v1778492568/heroupdate_tbsnre.mp4",
+    heroVideoMobile:
+      "https://res.cloudinary.com/dagiis3pz/video/upload/f_auto,q_auto:good,dpr_auto,w_1080,c_fill,ar_9:16,g_auto/v1778492568/heroupdate_tbsnre.mp4",
     momentsVideo1:
       "https://res.cloudinary.com/dagiis3pz/video/upload/f_auto,q_auto:eco,w_960/v1778466617/add1_mnuwep.mp4",
     momentsVideo2:

@@ -232,7 +232,7 @@ export default function WeddingPage() {
       </div>
 
       {/* 🔥 HERO (AGENCY STYLE) */}
-      <section className="h-[110vh] relative flex items-center justify-center overflow-hidden">
+      <section className="h-[100vh] md:h-[110vh] relative flex items-center justify-center overflow-hidden">
         {/* VIDEO */}
         <video
           autoPlay
@@ -242,6 +242,11 @@ export default function WeddingPage() {
           preload="metadata"
           className="absolute inset-0 w-full h-full object-cover"
         >
+          <source
+            media="(max-width: 768px)"
+            src={config.media.heroVideoMobile}
+            type="video/mp4"
+          />
           <source src={config.media.heroVideo} type="video/mp4" />
         </video>
 
