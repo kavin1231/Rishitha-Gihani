@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { FaMusic, FaPause } from "react-icons/fa";
 import AOS from "aos";
@@ -16,7 +16,9 @@ export default function WeddingPage() {
 
   useEffect(() => {
     AOS.init({ duration: 900, once: true });
-    setTimeout(() => setLoaded(true), 1200);
+    const timer = setTimeout(() => setLoaded(true), 1200);
+
+    return () => clearTimeout(timer);
   }, []);
 
   // 🎵 MUSIC CONTROL - Optimized with useCallback
@@ -48,11 +50,25 @@ export default function WeddingPage() {
       .catch(() => setPlaying(false));
   }, [opened, showIntro]);
 
-  // ✨ floating particles
-  const particles = Array.from({ length: 25 });
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 25 }, () => ({
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        duration: `${2 + Math.random() * 4}s`,
+      })),
+    []
+  );
 
-  // 🌟 floating lights
-  const lights = Array.from({ length: 8 });
+  const lights = useMemo(
+    () =>
+      Array.from({ length: 8 }, () => ({
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        duration: `${4 + Math.random() * 4}s`,
+      })),
+    []
+  );
 
   if (showIntro) {
     return (
@@ -179,9 +195,9 @@ export default function WeddingPage() {
             key={i}
             className="absolute w-1 h-1 bg-yellow-400 rounded-full opacity-40 animate-pulse"
             style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDuration: `${2 + Math.random() * 5}s`,
+              top: particles[i].top,
+              left: particles[i].left,
+              animationDuration: particles[i].duration,
             }}
           />
         ))}
@@ -202,8 +218,8 @@ export default function WeddingPage() {
             }}
             className="absolute w-72 h-72 bg-yellow-400/5 blur-3xl rounded-full"
             style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
+              top: lights[i].top,
+              left: lights[i].left,
             }}
           />
         ))}
@@ -394,6 +410,7 @@ export default function WeddingPage() {
               className="w-full h-[400px]"
               src="https://www.google.com/maps?q=Tangerine+Beach+Hotel&z=17&output=embed"
               title="Tangerine Beach Hotel location"
+              loading="lazy"
             />
 
             <a
