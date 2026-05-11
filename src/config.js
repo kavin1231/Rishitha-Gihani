@@ -5,15 +5,15 @@ export const config = {
   // Cloudinary media
   media: {
     introVideo:
-      "https://res.cloudinary.com/dagiis3pz/video/upload/v1778466763/counting2_jdd8ed.mp4",
+      "https://res.cloudinary.com/dagiis3pz/video/upload/f_auto,q_auto:eco,w_960/v1778466763/counting2_jdd8ed.mp4",
     backgroundMusic:
       "https://res.cloudinary.com/dagiis3pz/video/upload/v1778466790/alex-warren-ordinary_lkr069.mp3",
     heroVideo:
-      "https://res.cloudinary.com/dagiis3pz/video/upload/v1778466621/hero_hwaszl.mp4",
+      "https://res.cloudinary.com/dagiis3pz/video/upload/f_auto,q_auto:eco,w_1280/v1778466621/hero_hwaszl.mp4",
     momentsVideo1:
-      "https://res.cloudinary.com/dagiis3pz/video/upload/v1778466617/add1_mnuwep.mp4",
+      "https://res.cloudinary.com/dagiis3pz/video/upload/f_auto,q_auto:eco,w_960/v1778466617/add1_mnuwep.mp4",
     momentsVideo2:
-      "https://res.cloudinary.com/dagiis3pz/video/upload/v1778466605/add2_u2sarl.mp4",
+      "https://res.cloudinary.com/dagiis3pz/video/upload/f_auto,q_auto:eco,w_960/v1778466605/add2_u2sarl.mp4",
     backgroundImage:
       "https://res.cloudinary.com/dagiis3pz/image/upload/v1778466823/back1_hrkdzo.jpg",
     gallery1:

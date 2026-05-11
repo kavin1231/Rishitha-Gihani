@@ -10,8 +10,9 @@ export default function WeddingPage() {
   const introRef = useRef(null);
   const [playing, setPlaying] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(false);
   const [opened, setOpened] = useState(false);
+  const [musicMuted, setMusicMuted] = useState(true);
 
   useEffect(() => {
     AOS.init({ duration: 900, once: true });
@@ -31,26 +32,21 @@ export default function WeddingPage() {
     }
   }, [playing]);
 
-  // 🎵 auto unlock on first click
   useEffect(() => {
-    const unlock = () => {
-      // Try to play the intro video with sound if it's present (will be allowed after a user interaction)
-      try {
-        if (introRef.current) {
-          introRef.current.play().catch(() => {});
-        }
-      } catch (e) {}
+    if (showIntro) {
+      introRef.current?.play().catch(() => {});
+    }
+  }, [showIntro]);
 
-      // Also attempt to play background audio (for music)
-      audioRef.current
-        ?.play()
-        .then(() => setPlaying(true))
-        .catch(() => {});
-    };
+  useEffect(() => {
+    if (!opened || showIntro || !audioRef.current) return;
 
-    window.addEventListener("click", unlock, { once: true });
-    return () => window.removeEventListener("click", unlock);
-  }, []);
+    audioRef.current.muted = false;
+    audioRef.current
+      .play()
+      .then(() => setPlaying(true))
+      .catch(() => setPlaying(false));
+  }, [opened, showIntro]);
 
   // ✨ floating particles
   const particles = Array.from({ length: 25 });
@@ -60,19 +56,31 @@ export default function WeddingPage() {
 
   if (showIntro) {
     return (
-      <div className="fixed inset-0 z-[100] bg-black">
-        <video
-          ref={introRef}
-          autoPlay
-          playsInline
-          preload="auto"
-          className="w-full h-full object-cover"
-          onEnded={() => setShowIntro(false)}
-          onError={() => setShowIntro(false)}
-        >
-          <source src={config.media.introVideo} type="video/mp4" />
-        </video>
-      </div>
+      <>
+        <audio ref={audioRef} loop autoPlay muted={musicMuted} preload="auto">
+          <source src={config.media.backgroundMusic} type="audio/mp3" />
+        </audio>
+
+        <div className="fixed inset-0 z-[100] bg-black">
+          <video
+            ref={introRef}
+            autoPlay
+            playsInline
+            preload="metadata"
+            className="w-full h-full object-cover"
+            onEnded={() => {
+              setMusicMuted(false);
+              setShowIntro(false);
+            }}
+            onError={() => {
+              setMusicMuted(false);
+              setShowIntro(false);
+            }}
+          >
+            <source src={config.media.introVideo} type="video/mp4" />
+          </video>
+        </div>
+      </>
     );
   }
 
@@ -132,11 +140,9 @@ export default function WeddingPage() {
               whileTap={{ scale: 0.96 }}
               onClick={() => {
                 setOpened(true);
-
-                setTimeout(() => {
-                  audioRef.current?.play();
-                  setPlaying(true);
-                }, 500);
+                setPlaying(false);
+                setMusicMuted(true);
+                setShowIntro(true);
               }}
               className="mt-12 px-10 py-5 rounded-full border border-yellow-400 text-yellow-300 uppercase tracking-[5px] text-sm hover:bg-yellow-400 hover:text-black transition-all duration-700"
             >
@@ -154,7 +160,7 @@ export default function WeddingPage() {
   return (
     <div className="bg-black text-white font-serif overflow-x-hidden">
       {/* 🎶 AUDIO */}
-      <audio ref={audioRef} loop>
+      <audio ref={audioRef} loop muted={musicMuted} preload="auto">
         <source src={config.media.backgroundMusic} type="audio/mp3" />
       </audio>
 
@@ -211,6 +217,7 @@ export default function WeddingPage() {
           muted
           loop
           playsInline
+          preload="metadata"
           className="absolute inset-0 w-full h-full object-cover"
         >
           <source src={config.media.heroVideo} type="video/mp4" />
@@ -358,6 +365,7 @@ export default function WeddingPage() {
                   muted
                   loop
                   playsInline
+                  preload="metadata"
                   className="w-full h-[850px] rounded-2xl shadow-2xl object-cover"
                 >
                   <source src={config.media.momentsVideo1} type="video/mp4" />
@@ -369,6 +377,7 @@ export default function WeddingPage() {
                   muted
                   loop
                   playsInline
+                  preload="metadata"
                   className="w-full h-[850px] rounded-2xl shadow-2xl object-cover"
                 >
                   <source src={config.media.momentsVideo2} type="video/mp4" />
