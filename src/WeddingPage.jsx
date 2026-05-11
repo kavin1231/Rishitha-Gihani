@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
+import React, {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useCallback,
+} from "react";
 import { motion } from "framer-motion";
 import { FaMusic, FaPause } from "react-icons/fa";
 import AOS from "aos";
@@ -57,7 +63,7 @@ export default function WeddingPage() {
         left: `${Math.random() * 100}%`,
         duration: `${2 + Math.random() * 4}s`,
       })),
-    []
+    [],
   );
 
   const lights = useMemo(
@@ -67,7 +73,7 @@ export default function WeddingPage() {
         left: `${Math.random() * 100}%`,
         duration: `${4 + Math.random() * 4}s`,
       })),
-    []
+    [],
   );
 
   if (showIntro) {
@@ -137,7 +143,7 @@ export default function WeddingPage() {
             </p>
 
             <h1 className="text-5xl md:text-7xl text-white font-light leading-tight">
-              Rishitha <span className="text-yellow-400">&</span> Gihani
+              Gihani <span className="text-yellow-400">&</span> Rishitha
             </h1>
 
             <div className="w-32 h-[1px] bg-yellow-400 mx-auto my-8"></div>
@@ -257,7 +263,7 @@ export default function WeddingPage() {
           </p>
 
           <h1 className="text-6xl md:text-8xl font-light text-white leading-tight">
-            Rishitha <span className="text-yellow-400">&</span> Gihani
+            Gihani <span className="text-yellow-400">&</span> Rishitha
           </h1>
 
           <div className="w-32 h-[1px] bg-yellow-400 mx-auto my-8"></div>
