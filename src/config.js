@@ -9,7 +9,7 @@ export const config = {
     backgroundMusic:
       "https://res.cloudinary.com/dagiis3pz/video/upload/v1778466790/alex-warren-ordinary_lkr069.mp3",
     heroVideo:
-      "https://res.cloudinary.com/dagiis3pz/video/upload/f_auto,q_auto:eco,w_1280/v1778466621/hero_hwaszl.mp4",
+      "https://res.cloudinary.com/dagiis3pz/video/upload/f_auto,q_auto:eco,w_1280/v1778491471/heroupdate_eixzoo.mp4",
     momentsVideo1:
       "https://res.cloudinary.com/dagiis3pz/video/upload/f_auto,q_auto:eco,w_960/v1778466617/add1_mnuwep.mp4",
     momentsVideo2:
