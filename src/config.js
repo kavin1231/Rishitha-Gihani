@@ -29,7 +29,7 @@ export const config = {
   // Contact & RSVP
   rsvpFormUrl:
     import.meta.env.VITE_RSVP_FORM_URL ||
-    "https://docs.google.com/forms/d/e/1FAIpQLSd5SC31tZzlzRKC7bJ6_8TX7mTOZU26mXNrd7l4cpNc0Q8F-Q/viewform?usp=publish-editor",
+    "https://docs.google.com/forms/d/e/1FAIpQLSe7yZ55Ds41e3HdZAcbcaLk0rwGmRCzj7ErtAuEPk_KEhSEQA/viewform?usp=publish-editor",
   googleMapsLocation:
     import.meta.env.VITE_GOOGLE_MAPS_LOCATION ||
     "https://maps.app.goo.gl/k5Bjt9T52PRJZjfV6",
