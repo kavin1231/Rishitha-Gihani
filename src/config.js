@@ -2,6 +2,30 @@
 // Sensitive URLs are loaded from environment variables for security
 
 export const config = {
+  // Cloudinary media
+  media: {
+    introVideo:
+      "https://res.cloudinary.com/dagiis3pz/video/upload/v1778466763/counting2_jdd8ed.mp4",
+    backgroundMusic:
+      "https://res.cloudinary.com/dagiis3pz/video/upload/v1778466790/alex-warren-ordinary_lkr069.mp3",
+    heroVideo:
+      "https://res.cloudinary.com/dagiis3pz/video/upload/v1778466621/hero_hwaszl.mp4",
+    momentsVideo1:
+      "https://res.cloudinary.com/dagiis3pz/video/upload/v1778466617/add1_mnuwep.mp4",
+    momentsVideo2:
+      "https://res.cloudinary.com/dagiis3pz/video/upload/v1778466605/add2_u2sarl.mp4",
+    backgroundImage:
+      "https://res.cloudinary.com/dagiis3pz/image/upload/v1778466823/back1_hrkdzo.jpg",
+    gallery1:
+      "https://res.cloudinary.com/dagiis3pz/image/upload/v1778466824/g1_no5e5r.jpg",
+    gallery2:
+      "https://res.cloudinary.com/dagiis3pz/image/upload/v1778466825/g2_nlicrr.jpg",
+    gallery3:
+      "https://res.cloudinary.com/dagiis3pz/image/upload/v1778466826/g3_lstxuc.jpg",
+    gallery4:
+      "https://res.cloudinary.com/dagiis3pz/image/upload/v1778466822/g4_hocmy9.jpg",
+  },
+
   // Contact & RSVP
   rsvpFormUrl:
     import.meta.env.VITE_RSVP_FORM_URL ||

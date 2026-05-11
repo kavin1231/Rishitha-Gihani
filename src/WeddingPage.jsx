@@ -70,7 +70,7 @@ export default function WeddingPage() {
           onEnded={() => setShowIntro(false)}
           onError={() => setShowIntro(false)}
         >
-          <source src="/counting2.mp4" type="video/mp4" />
+          <source src={config.media.introVideo} type="video/mp4" />
         </video>
       </div>
     );
@@ -155,7 +155,7 @@ export default function WeddingPage() {
     <div className="bg-black text-white font-serif overflow-x-hidden">
       {/* 🎶 AUDIO */}
       <audio ref={audioRef} loop>
-        <source src="/alex-warren-ordinary.mp3" type="audio/mp3" />
+        <source src={config.media.backgroundMusic} type="audio/mp3" />
       </audio>
 
       {/* 🎧 MUSIC BUTTON */}
@@ -213,7 +213,7 @@ export default function WeddingPage() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/hero.mp4" type="video/mp4" />
+          <source src={config.media.heroVideo} type="video/mp4" />
         </video>
 
         {/* DARK OVERLAY */}
@@ -269,7 +269,7 @@ export default function WeddingPage() {
       <div
         className="relative min-h-screen mt-8"
         style={{
-          backgroundImage: "url('/back1.jpeg')",
+          backgroundImage: `url('${config.media.backgroundImage}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -300,8 +300,7 @@ export default function WeddingPage() {
       <div
         className="relative"
         style={{
-          backgroundImage:
-            "url('https://res.cloudinary.com/dagiis3pz/image/upload/f_auto,q_auto,w_1280/v1778311051/wedding-site/g6.jpg')",
+          backgroundImage: `url('${config.media.backgroundImage}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -320,7 +319,7 @@ export default function WeddingPage() {
                   <motion.img
                     key={img}
                     whileHover={{ scale: 1.05 }}
-                    src={`/g${img}.jpeg`}
+                    src={config.media[`gallery${img}`]}
                     loading="lazy"
                     alt={`Gallery image ${img}`}
                     className="w-full rounded-[30px] h-[420px] object-cover shadow-[0_0_50px_rgba(0,0,0,0.5)] hover:scale-[1.03] hover:rotate-[1deg] transition-all duration-700"
@@ -361,7 +360,7 @@ export default function WeddingPage() {
                   playsInline
                   className="w-full h-[850px] rounded-2xl shadow-2xl object-cover"
                 >
-                  <source src="/add1.mp4" type="video/mp4" />
+                  <source src={config.media.momentsVideo1} type="video/mp4" />
                 </video>
 
                 <video
@@ -372,7 +371,7 @@ export default function WeddingPage() {
                   playsInline
                   className="w-full h-[850px] rounded-2xl shadow-2xl object-cover"
                 >
-                  <source src="/add2.mp4" type="video/mp4" />
+                  <source src={config.media.momentsVideo2} type="video/mp4" />
                 </video>
               </div>
             </div>
